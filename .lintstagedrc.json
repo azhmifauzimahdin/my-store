@@ -1,4 +1,4 @@
 {
-  "*.ts": ["eslint --fic"],
-  "*.tss": ["eslint --fic"]
+  "*.ts": ["eslint --fix"],
+  "*.tss": ["eslint --fix"]
 }
