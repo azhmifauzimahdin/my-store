@@ -82,7 +82,7 @@ export default function RegisterPage() {
         </form>
       </div>
       <p className={styles.register__link}>
-        Have an acoount? Sign in <Link href="auth/login">Here</Link>
+        Have an acoount? Sign in <Link href="login">Here</Link>
       </p>
     </div>
   );

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Lato } from "next/font/google";
 import "./globals.css";
+import Navbar from "./components/Navbar/Navbar";
+import ClientLayout from "./layout.client";
 
 const lato = Lato({
   subsets: ["latin"],
@@ -18,8 +20,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={lato.className}>{children}</body>
+    <html lang="id">
+      <body className={lato.className}>
+        <ClientLayout>{children}</ClientLayout>
+      </body>
     </html>
   );
 }

@@ -10,6 +10,7 @@ import {
 } from "firebase/firestore";
 import app from "./init";
 import bcrypt from "bcrypt";
+import { UserWithPassword } from "@/app/types/user";
 
 const firestore = getFirestore(app);
 
@@ -62,5 +63,27 @@ export async function signUp(userData: {
   } catch (error) {
     console.error("Gagal register:", error);
     return false;
+  }
+}
+
+export async function signIn(email: string) {
+  try {
+    const q = query(
+      collection(firestore, "users"),
+      where("email", "==", email)
+    );
+
+    const snapshot = await getDocs(q);
+    const userDoc = snapshot.docs[0];
+
+    if (!userDoc) return null;
+
+    return {
+      id: userDoc.id,
+      ...userDoc.data(),
+    } as UserWithPassword;
+  } catch (error) {
+    console.error("Login error:", error);
+    return null;
   }
 }
