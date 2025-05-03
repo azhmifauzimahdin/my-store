@@ -70,6 +70,17 @@ export default function LoginPage() {
             {isLoading ? "Loading..." : "Login"}
           </button>
         </form>
+        <hr className={styles.login__form__divider} />
+        <div className={styles.login__form__other}>
+          <button
+            type="button"
+            onClick={() => signIn("google", { redirect: false, callbackUrl })}
+            className={styles.login__form__other__button}
+          >
+            <i className="bx bxl-google"></i>
+            Login With Google
+          </button>
+        </div>
       </div>
       <p className={styles.login__link}>
         Don&apos;t have an account? Sign up <Link href="register">Here</Link>

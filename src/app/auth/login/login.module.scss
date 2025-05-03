@@ -33,8 +33,28 @@
         background-color: #000;
         color: #fff;
         width: 100%;
-        padding: 10px;
+        padding: 11px;
         border: none;
+      }
+    }
+    &__divider {
+      margin-block: 20px;
+    }
+    &__other {
+      width: 100%;
+      &__button {
+        background-color: #000;
+        color: #fff;
+        width: 100%;
+        padding: 11px;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        i {
+          font-size: 1.2rem;
+        }
       }
     }
   }

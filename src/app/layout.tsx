@@ -21,6 +21,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="id">
+      <head>
+        <link
+          href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+          rel="stylesheet"
+        />
+      </head>
       <body className={lato.className}>
         <ClientLayout>{children}</ClientLayout>
       </body>
