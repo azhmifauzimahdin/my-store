@@ -4,6 +4,8 @@ import styles from "./login.module.scss";
 import { FormEvent, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
+import Input from "@/components/ui/Input/Input";
+import Button from "@/components/ui/Button/Button";
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -48,38 +50,22 @@ export default function LoginPage() {
       {error && <p className={styles.login__error}>{error}</p>}
       <div className={styles.login__form}>
         <form onSubmit={handleSubmit}>
-          <div className={styles.login__form__item}>
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              className={styles.login__form__item__input}
-            />
-          </div>
-          <div className={styles.login__form__item}>
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              className={styles.login__form__item__input}
-            />
-          </div>
-          <button type="submit" className={styles.login__form__item__button}>
+          <Input label="Email" type="email" name="email" />
+          <Input label="Password" type="password" name="password" />
+          <Button type="submit" className={styles.login__form__button}>
             {isLoading ? "Loading..." : "Login"}
-          </button>
+          </Button>
         </form>
         <hr className={styles.login__form__divider} />
         <div className={styles.login__form__other}>
-          <button
+          <Button
             type="button"
             onClick={() => signIn("google", { redirect: false, callbackUrl })}
             className={styles.login__form__other__button}
           >
             <i className="bx bxl-google"></i>
             Login With Google
-          </button>
+          </Button>
         </div>
       </div>
       <p className={styles.login__link}>

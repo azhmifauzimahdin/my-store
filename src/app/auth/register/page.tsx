@@ -3,6 +3,8 @@ import Link from "next/link";
 import styles from "./register.module.scss";
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
+import Input from "@/components/ui/Input/Input";
+import Button from "@/components/ui/Button/Button";
 
 export default function RegisterPage() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -40,45 +42,13 @@ export default function RegisterPage() {
       {error && <p className={styles.register__error}>{error}</p>}
       <div className={styles.register__form}>
         <form onSubmit={handleSubmit}>
-          <div className={styles.register__form__item}>
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              className={styles.register__form__item__input}
-            />
-          </div>
-          <div className={styles.register__form__item}>
-            <label htmlFor="fullname">Fullname</label>
-            <input
-              type="text"
-              id="fullname"
-              name="fullname"
-              className={styles.register__form__item__input}
-            />
-          </div>
-          <div className={styles.register__form__item}>
-            <label htmlFor="phone">Phone</label>
-            <input
-              type="text"
-              id="phone"
-              name="phone"
-              className={styles.register__form__item__input}
-            />
-          </div>
-          <div className={styles.register__form__item}>
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              className={styles.register__form__item__input}
-            />
-          </div>
-          <button type="submit" className={styles.register__form__item__button}>
+          <Input label="Email" type="email" name="email" />
+          <Input label="Fullname" type="text" name="fullname" />
+          <Input label="Phone" type="text" name="phone" />
+          <Input label="Password" type="password" name="password" />
+          <Button type="submit" className={styles.register__form__button}>
             {isLoading ? "Loading..." : "Register"}
-          </button>
+          </Button>
         </form>
       </div>
       <p className={styles.register__link}>

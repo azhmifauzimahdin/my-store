@@ -9,8 +9,6 @@ import {
   where,
 } from "firebase/firestore";
 import app from "./init";
-import bcrypt from "bcrypt";
-import { UserWithPassword } from "@/app/types/user";
 
 const firestore = getFirestore(app);
 
@@ -30,91 +28,20 @@ export async function retrieveDataById(collectionName: string, id: string) {
   return data;
 }
 
-export async function signUp(userData: {
-  email: string;
-  fullname: string;
-  phone: string;
-  password: string;
-  role?: string;
-}): Promise<boolean> {
-  try {
-    const q = query(
-      collection(firestore, "users"),
-      where("email", "==", userData.email)
-    );
-    const snapshot = await getDocs(q);
+export async function retrieveDataByField(
+  collectionName: string,
+  field: string,
+  value: string
+) {
+  const q = query(
+    collection(firestore, collectionName),
+    where(field, "==", value)
+  );
 
-    if (!snapshot.empty) {
-      return false;
-    }
-
-    const role = userData.role || "member";
-    const hashedPassword = await bcrypt.hash(userData.password, 10);
-
-    await addDoc(collection(firestore, "users"), {
-      email: userData.email,
-      fullname: userData.fullname,
-      phone: userData.phone,
-      password: hashedPassword,
-      role: role,
-    });
-
-    return true;
-  } catch (error) {
-    console.error("Gagal register:", error);
-    return false;
-  }
+  const data = await getDocs(q);
+  return data;
 }
 
-export async function signIn(email: string) {
-  try {
-    const q = query(
-      collection(firestore, "users"),
-      where("email", "==", email)
-    );
-
-    const snapshot = await getDocs(q);
-    const userDoc = snapshot.docs[0];
-
-    if (!userDoc) return null;
-
-    return {
-      id: userDoc.id,
-      ...userDoc.data(),
-    } as UserWithPassword;
-  } catch (error) {
-    console.error("Login error:", error);
-    return null;
-  }
-}
-
-export async function loginWithGoogle(data: {
-  email: string;
-  fullname: string;
-  type: string;
-}): Promise<any | null> {
-  try {
-    const userQuery = query(
-      collection(firestore, "users"),
-      where("email", "==", data.email)
-    );
-
-    const snapshot = await getDocs(userQuery);
-    const userDoc = snapshot.docs[0];
-
-    if (userDoc) {
-      return { id: userDoc.id, ...userDoc.data() };
-    } else {
-      const newUser = {
-        ...data,
-        role: "member",
-      };
-
-      const res = await addDoc(collection(firestore, "users"), newUser);
-      return { id: res.id, ...newUser };
-    }
-  } catch (error) {
-    console.error("Login with Google error:", error);
-    return null;
-  }
+export async function addData(collectionName: string, data: any) {
+  return addDoc(collection(firestore, collectionName), data);
 }

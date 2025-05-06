@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Lato } from "next/font/google";
 import "./globals.css";
-import Navbar from "./components/Navbar/Navbar";
+import Navbar from "./components/layouts/Navbar/Navbar";
 import ClientLayout from "./layout.client";
 
 const lato = Lato({
